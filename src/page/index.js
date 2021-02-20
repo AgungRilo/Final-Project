@@ -1,5 +1,5 @@
 import Login from './login';
-import Register from './register';
 import Error from './403';
+import Bencana from './bencana';
 
-export {Login,Register,Error} 
+export {Login,Error,Bencana} 

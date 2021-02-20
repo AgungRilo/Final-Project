@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import {Login,Register} from '../../page';
+import {Login} from '../../page';
 import Home from '../home';
 import { Switch, Route } from "react-router-dom";
 import {Error} from '../../page';
 
-class Body extends Component {
+class Validation extends Component {
     constructor(props) {
         super(props);
         this.state = {  }
@@ -14,11 +14,9 @@ class Body extends Component {
         <Switch>
             <Route path="/" exact component={props => <Login {...props} />} />
             <Route path="/error" component={props => <Error {...props} />} />
-            <Route path="/error" component={props => <Error {...props} />} />
-            <Route path="/register" component={props => <Register {...props} />} />
         </Switch>
          );
     }
 }
  
-export default Body;
+export default Validation;

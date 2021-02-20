@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import {Login,Register} from './page';
-import {Header,Footer,Nav,Body} from './template';
+
+import {Header,Footer,Nav,Validation,Content} from './template';
 import { BrowserRouter as Router } from "react-router-dom";
 import {Error} from './page';
+import {connect} from 'react-redux';
 
 class App extends Component {
   constructor(props) {
@@ -13,23 +14,44 @@ class App extends Component {
 
   goToPage = page =>{
     this.setState({
-      currentPage:"login"
+      currentPage:"home"
     })
   }
 
   render() {
+    if (this.props.checkLogin === true) {
     return (
     <Router>
       <Header/>
-      {/* <Nav page={this.state.currentPage} changePage ={this.goToPage}/> */}
-      <Body page={this.state.currentPage}/>
-      <Footer/>
-      {/* <Error/> */}
+      <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+      <Nav page={this.state.currentPage} changePage ={this.goToPage}/>
+      </div >
+      <Content page={this.state.currentPage}/>
+      </div>
+      {/* <Footer/> */}
     </Router>
     );
+    }else{
+      return(
+        <Router>  
+          <Validation/>
+        </Router>
+      )
+    }
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  checkLogin: state.AReducer.isLogin,
+  dataUser: state.UReducer.users,
+  user: state.AReducer.userLogin
 
+})
+//mengubah data kereducer
+const mapDispatchToProps = dispatch => ({
+  submitLogin: (data) => dispatch({ type: "LOGIN_SUCCESS",payload:data }),
+  
+})
 
+export default (connect(mapStateToProps, mapDispatchToProps))(App);

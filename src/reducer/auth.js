@@ -1,9 +1,8 @@
 let defaultState = {
-    userLogin: {
-        isLogin: false,
-        username: "",
-        email: "",
-        flagPage:"LOGIN_REGIS"
+    isLogin:false,
+    dataUser:{
+        username:"",
+        email:""
     }
 }
 
@@ -15,22 +14,14 @@ const authReducer = (state = defaultState, action) => {
     switch (action.type) {
         case "LOGIN_SUCCESS":
             return {
-                userLogin: {
-                    isLogin: true,
-                    username: action.payload.user.username,
-                    email: action.payload.user.email,
-                    flagPage: action.payload.page
-                },
+                isLogin: true,
+                // dataUser:{
+                //     username: action.payload.dataUser.username,
+                //     email:action.payload.dataUser.email
+                // }
             }
-        case "MOVE_PAGE":
-            console.log("AUTH MOVE PAGE", action.payload.page)
-            return {
-                userLogin: {
-                    ...state.userLogin,
-                    flagPage: action.payload.page
-                }
-            }
-        case "LOGOUT":
+        
+        case "LOGOUT_SUCCESS":
             return defaultState
 
         default:

@@ -1,7 +1,7 @@
 import Header from './header';
 import Footer from './footer';
 import Nav from './navigation';
-import Body from './body';
+import Validation from './validation';
+import Content from './content';
 
-
-export {Header,Footer,Nav,Body}
+export {Validation,Header,Footer,Nav,Content}

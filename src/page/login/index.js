@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import login from '../../asset/login.png';
-import {Label,Input} from '../../component';
+import {Label,Input,Button} from '../../component';
+import {Redirect} from 'react-router-dom';
+
 
 class Login extends Component {
     constructor(props) {
@@ -33,26 +35,25 @@ class Login extends Component {
 
         if (find.length > 0) {
             alert("Login Sukses")
-            this.props.submitLogin( {user: find1[0], page:"HOME"} )
-            this.props.history.push("/home")
+            this.props.submitLogin( {user: find1[0]} )
+            this.props.history.push("/")
         } else {
-            alert("gagal")
+            alert("Username atau password salah")
+            this.props.history.push("/error")
         }
         // e.preventDefault()
     }
-    // componentDidMount(){
-    //     this.setState({
-    //         ...this.state
-    //     });
-    //     this.props.movePage({page:"LOGIN_REGIS"})
-    // }
+   
     render() {
+        if (this.props.isLogin) {
+            return <Redirect to="/" />
+        }
         return (
             <div className="login">
 
             <div className="container">
                 
-                <img src={login}/>
+                <img id="login" src={login}/>
                 <div className="div-group">
                     <Label >Username</Label>
                     <Input type="text" className="form-control" name="username" placeholder="Enter email"  onChange={this.setValue}/>
@@ -63,9 +64,9 @@ class Login extends Component {
                     <Input type="password" className="form-control" name="password" placeholder="Password"  onChange={this.setValue}/>
                 </div>
 
-                <button type="submit" className="btn btn-primary" onClick={() => this.props.history.push("/error")}>Sign In</button>
+                <Button type="submit" className="btn btn-primary" onClick={() => this.doLogin()}>Sign In</Button>
 
-                <button type="submit" id="register" className="btn btn-primary" onClick={() => this.props.history.push("/register")}>Register</button>
+                
 
             </div>
             </div>
@@ -76,6 +77,7 @@ class Login extends Component {
 
 //ketika mengambil data dari luar kelas
 const mapStateToProps = state => ({
+    checkLogin: state.AReducer.isLogin,
     dataUser: state.UReducer.users,
     user: state.AReducer.userLogin
 
@@ -83,7 +85,7 @@ const mapStateToProps = state => ({
 //mengubah data kereducer
 const mapDispatchToProps = dispatch => ({
     submitLogin: (data) => dispatch({ type: "LOGIN_SUCCESS",payload:data }),
-    movePage: (data) => dispatch({ type: "MOVE_PAGE",payload:data }),
+    
 })
 
 export default (connect(mapStateToProps, mapDispatchToProps))(Login);

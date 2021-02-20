@@ -1,25 +1,14 @@
 let defaultState = {
     id:0,
-    users: []
+    users: [{
+        username:"admin",
+        password:"12345",
+        email:"agungrilo1@gmail.com"
+    }]
 }
 // combineReducer
 const userReducer = (state = defaultState, action) => {
     switch (action.type) {
-        case "REGISTER":
-            let newData={
-                id:state.id++,
-                username:action.payload.username,
-                password:action.payload.password,
-                email:action.payload.email
-
-            }
-            let user=state.users.concat(newData);
-            console.log(user);
-            
-            return ({
-                users:user
-            })
-
         case "CLEAR_DATA":
             return defaultState
 

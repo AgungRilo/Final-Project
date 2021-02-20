@@ -38,7 +38,35 @@ h2{
   margin-top: 3vh;
 }
 
-img{
+#tsunami{
+  width: 100%;
+  height: 50%;
+  border-radius: 10px;
+}
+
+#merapi{
+  width: 100%;
+  height: 24vh;
+  border-radius: 10px;
+}
+
+#longsor{
+  width: 100%;
+  height: 24vh;
+  border-radius: 10px;
+}
+
+#banjir{
+  width: 100%;
+  height: 24vh;
+  border-radius: 10px;
+}
+
+#login{
   width: 20%;
   margin-left: 40vh;
+}
+
+.about{
+  margin-left: 2vh;
 }

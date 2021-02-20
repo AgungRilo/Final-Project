@@ -8,7 +8,7 @@ class Bencana extends Component {
     render() { 
         return ( 
             <div>
-                
+                ini bencana
             </div>
          );
     }
