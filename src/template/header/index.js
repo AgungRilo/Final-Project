@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import {connect} from 'react-redux';
 
 class Header extends Component {
     constructor(props) {
@@ -22,7 +24,9 @@ class Header extends Component {
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                                 <a className="dropdown-item" href="#">Admin</a>
                                 <div className="dropdown-divider" />
-                                <a className="dropdown-item" href="login.html">Logout</a>
+                                <Link to="/logout">
+                                <div className="dropdown-item"  onClick={this.props.logoutEvent} >Logout</div>
+                                </Link>
                             </div>
                         </li>
                     </ul>
@@ -34,4 +38,15 @@ class Header extends Component {
     }
 }
 
-export default Header;
+//ketika mengambil data dari luar kelas
+const mapStateToProps = state => ({
+    
+
+})
+//mengubah data kereducer
+const mapDispatchToProps = dispatch => ({
+    logoutEvent: () => dispatch({ type: "LOGOUT_SUCCESS" }),
+    
+})
+
+export default (connect(mapStateToProps, mapDispatchToProps))(Header);

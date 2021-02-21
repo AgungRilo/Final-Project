@@ -5,40 +5,42 @@ import {Header,Footer,Nav,Validation,Content} from './template';
 import { BrowserRouter as Router } from "react-router-dom";
 import {Error} from './page';
 import {connect} from 'react-redux';
+import AppLogin from './AppLogin';
+import {} from './template';
+import AppValidation from './AppValidation';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      
+    }
   }
 
-  goToPage = page =>{
-    this.setState({
-      currentPage:"home"
-    })
+  showHomePage=()=>{
+    if(this.props.checkLogin == true ){
+      return <AppLogin/>
+    }else{
+      return <AppValidation/>
+    }
   }
+ 
 
   render() {
-    if (this.props.checkLogin === true) {
+    
     return (
-    <Router>
-      <Header/>
-      <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-      <Nav page={this.state.currentPage} changePage ={this.goToPage}/>
-      </div >
-      <Content page={this.state.currentPage}/>
-      </div>
-      {/* <Footer/> */}
-    </Router>
+      <>
+    {this.showHomePage()}
+    {/* <AppLogin/> */}
+    </>
     );
-    }else{
-      return(
-        <Router>  
-          <Validation/>
-        </Router>
-      )
-    }
+    // }else{
+      // return(
+      //   <Router>  
+      //     <Validation/>
+      //   </Router>
+      // )
+  // }
   }
 }
 
