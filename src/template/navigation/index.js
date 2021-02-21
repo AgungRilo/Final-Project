@@ -56,14 +56,17 @@ class Nav extends Component {
                         <div className="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                           <nav className="sb-sidenav-menu-nested nav">
                             <Link to="/bencana">
-
                               <div className="nav-link">Bencana</div>
                             </Link>
                             <Link to="/provinsi">
-                            <div className="nav-link" >Provinsi</div>
+                              <div className="nav-link" >Provinsi</div>
                             </Link>
-                            <a className="nav-link" href="layout-sidenav-light.html">Kota</a>
-                            <a className="nav-link" href="layout-sidenav-light.html">Kecamatan</a>
+                            <Link to="/kota">
+                              <a className="nav-link" href="layout-sidenav-light.html">Kota</a>
+                            </Link>
+                            <Link to="/kecamatan">
+                              <a className="nav-link" href="layout-sidenav-light.html">Kecamatan</a>
+                            </Link>
                             <a className="nav-link" href="layout-sidenav-light.html">Kelurahan</a>
                             <a className="nav-link" href="layout-sidenav-light.html">Bantuan</a>
                           </nav>

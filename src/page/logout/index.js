@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Button} from '../../component';
 import P from '../../component/p';
+import { Footer } from '../../template';
 
 class LogOut extends Component {
     constructor(props) {
@@ -10,7 +11,7 @@ class LogOut extends Component {
     render() {
         return (
             <>
-                <div className="container py-5">
+                <div className="container py-5" id="page">
                     <div className="row">
                         <div className="col-md-2 text-center">
                             <P><i className="fa fa-sign-out-alt fa-5x"></i><br />Status Code: Sign Out</P>
@@ -22,10 +23,8 @@ class LogOut extends Component {
                         </div>
                     </div>
                 </div>
-
-                <div id="footer" class="text-center">
-                Copyright@Agung G2Academy x NexSoft
-     </div></>
+                    <Footer/>
+               </>
         );
     }
 }

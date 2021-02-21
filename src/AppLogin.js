@@ -14,11 +14,7 @@ class AppLogin extends Component {
     }
   }
 
-  goToPage = page =>{
-    this.setState({
-      currentPage:page
-    })
-  }
+  
 
   render() {
     
@@ -27,9 +23,9 @@ class AppLogin extends Component {
       <Header/>
       <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-      <Nav page={this.state.currentPage} changePage ={this.goToPage}/>
+      <Nav />
       </div >
-      <Content page={this.state.currentPage}/>
+      <Content />
       </div>
       {/* <Footer/> */}
     </Router>

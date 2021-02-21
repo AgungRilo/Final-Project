@@ -31,16 +31,10 @@ class App extends Component {
     return (
       <>
     {this.showHomePage()}
-    {/* <AppLogin/> */}
+    
     </>
     );
-    // }else{
-      // return(
-      //   <Router>  
-      //     <Validation/>
-      //   </Router>
-      // )
-  // }
+    
   }
 }
 

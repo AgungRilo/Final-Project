@@ -1,8 +1,12 @@
 let defaultState = {
     dataProvinsi:[
-        // {
-        //     provinsi:"Jawa Barat",
-        // }
+        {
+            provinsi:"Jawa Barat",
+        },
+        {
+            provinsi:"Jawa Tengah",
+        }
+
     ]
 }
 
@@ -30,7 +34,7 @@ const provinsiReducer = (state =defaultState,action)=>{
             ...state,
             dataProvinsi:dataProvinsiBaru
         }
-        case "SUNTIN_PROVINSI":
+        case "SUNTING_PROVINSI":
             let newBencanaSunting=state.dataProvinsi
             newBencanaSunting[action.provinsi.index].provinsi = action.payload.provinsi;
         return{

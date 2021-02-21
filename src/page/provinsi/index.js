@@ -80,7 +80,7 @@ class Provinsi extends Component {
 
 
     render() { 
-        if("bencana" in this.state.provinsiEdit){
+        if("provinsi" in this.state.provinsiEdit){
             this.setState({
                 provinsi:this.state.provinsiEdit.provinsi
             })
