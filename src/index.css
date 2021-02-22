@@ -20,6 +20,10 @@ h2{
   margin-left: 3vh;
 }
 
+.right{
+  margin-left: 100vh;
+}
+
 #page{
   margin-top: 20vh;
 }
@@ -42,9 +46,11 @@ h2{
   margin-top: 3vh;
 }
 
+
+
 #tsunami{
   width: 100%;
-  height: 50%;
+  height: 24vh;
   border-radius: 10px;
 }
 
@@ -52,6 +58,10 @@ h2{
   width: 100%;
   height: 24vh;
   border-radius: 10px;
+}
+
+#tentang{
+  margin-top: 10vh;
 }
 
 #longsor{
@@ -72,7 +82,7 @@ h2{
 }
 
 #container{
-  margin: 10vh 10vh;
+  margin: 10vh 0vh;
 }
 
 .about{
@@ -83,7 +93,50 @@ h2{
   
 }
 
+.modal-body .required{
+  
+}
+
+.modal-body .required:after{
+  font-weight: bold;
+  color: #e32;
+  content: '*';
+  display:inline;
+}
+
+#btnKegiatan{
+  margin-left: 110vh;
+}
+
+#btnBencana{
+  margin-left: 100vh;
+}
+
+#btnKota{
+  margin-left: 100vh;
+}
+
+#btnProvinsi{
+  margin-left: 100vh;
+}
+
+#btnKecamatan{
+  margin-left: 100vh;
+}
+
+#btnKelurahan{
+  margin-left: 100vh;
+}
+
+#btnBantuan{
+  margin-left: 100vh;
+}
+
+#btnKegiatan{
+  margin-left: 130vh;
+}
+
 #hapus{
   margin-top: 1vh;
-  width: 12.2vh;
+  width: 14.2vh;
 }

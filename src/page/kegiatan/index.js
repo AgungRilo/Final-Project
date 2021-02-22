@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 
 import { Label,Input,Button } from '../../component';
 import { connect } from 'react-redux';
+import bencana from '../bencana';
 
-class Kelurahan extends Component {
+class Kegiatan extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -11,9 +12,12 @@ class Kelurahan extends Component {
             kota:"",
             kecamatan:"",
             kelurahan:"",
+            tanggalBencana:"",
+            tanggalKegiatan:"",
+            bantuan:"",
             kondisi:0,
             index:"",
-            kelurahanEdit:{},
+            kegiatanEdit:{},
             disabled  :true
             // idx:""
 
@@ -36,25 +40,25 @@ class Kelurahan extends Component {
         let obj=this.state
 
         if (this.state.kondisi === 0) {
-            if (obj.kota === "" || obj.kecamatan === "" || obj.kelurahan === "" || obj.provinsi === "" ) {
+            if (obj.kota === "" || obj.kecamatan === "" || obj.kelurahan === "" || obj.provinsi === "" || obj.bencana === "" || obj.bantuan !== "" ) {
                 alert("Data tidak boleh kosong !")
                 
             } else {
-                const idxKelurahan = this.props.kelurahanData.findIndex(x => x.kelurahan === this.state.kelurahan)
-                console.log("index",idxKelurahan);
-                console.log("bencana data",this.props.kelurahanData);
+                // const idxKegiatan = this.props.kegiatanData.findIndex(x => x.kegiatan === this.state.kegiatan)
+                // console.log("index",idxKegiatan);
+                console.log("bencana data",this.props.kegiatanData);
             
-                if(idxKelurahan >=0){
-                    alert("Nama kelurahan sudah ada !!")
-                }else{
-                    this.props.simpanKelurahan(obj);
+                // if(idxKegiatan >=0){
+                //     alert("Nama kegiatan sudah ada !!")
+                // }else{
+                    this.props.simpanKegiatan(obj);
                     el.preventDefault()
                     this.clear()
                     alert("Data berhasil tersimpan !!")
-                }
+                // }
             }
         } else {
-            this.props.suntingKelurahan(obj)
+            this.props.suntingKegiatan(obj)
             this.setState({
                 kondisi:0
             });
@@ -71,7 +75,10 @@ class Kelurahan extends Component {
           kota : "",
           provinsi:"",
           kecamatan:"",
-          kelurahan:""
+          kelurahan:"",
+          tanggalBencana:"",
+          tanggalKegiatan:""
+          
           
         })
     }
@@ -79,10 +86,10 @@ class Kelurahan extends Component {
     hapusData = (index) => {
         if(window.confirm("Apakah anda ingin menghapus data ini ?")){
 
-            let kelurahanBaru = this.props.kelurahanData;
+            let kegiatanBaru = this.props.kegiatanData;
             
-            console.log(kelurahanBaru);
-            this.props.hapusKelurahan({kelurahanUpdate : kelurahanBaru})
+            console.log(kegiatanBaru);
+            this.props.hapuskegiatan({kegiatanUpdate : kegiatanBaru})
             
             alert("Berhasil Menghapus Data !!");
         }
@@ -97,17 +104,17 @@ class Kelurahan extends Component {
           index: index
         });
     
-        const dataEdit=this.props.dataKelurahan[index];
+        const dataEdit=this.props.dataKegiatan[index];
       
         this.setState({
-          kelurahanEdit: dataEdit
+          kegiatanEdit: dataEdit
         })
       
       }
     
       reset = ()=> {
         this.setState({
-          kelurahanEdit :{}
+          kegiatanEdit :{}
         })
       }
     
@@ -119,17 +126,18 @@ class Kelurahan extends Component {
         console.log(this.props.provinsiData);
         console.log(this.props.kotaData);
         console.log(this.props.kecamatanData);
-        console.log(this.props.kelurahanData);
+        console.log(this.props.kegiatanData);
         
-        console.log("data b encacna", this.props.bencanaData);
-        if ("kelurahan" in this.state.kelurahanEdit) {
+        console.log("data b encacna", this.props.kegiatanData);
+        if ("kegiatan" in this.state.kegiatanEdit) {
             this.setState({
-                kelurahan: this.state.bencanaEdit.kelurahan,
-                deskripsi: this.state.bencanaEdit.deskripsi
+                tanggalKegiatan: this.state.kegiatanEdit.tanggalKegiatan,
+                tanggalBencana: this.state.kegiatanEdit.tanggalBencana,
+                deskripsi: this.state.kegiatanEdit.deskripsi
             })
             this.reset();
         }
-        const {kota, provinsi,kecamatan,kelurahan}=this.state
+        const {kota, provinsi,kecamatan,kelurahan,tanggalBencana,tanggalKegiatan,bantuan,bencana}=this.state
         return (
             <>
                 <div>
@@ -139,11 +147,12 @@ class Kelurahan extends Component {
                                 <div className="container-fluid" id="container">
                                     <div className="card mb-4">
                                         <div className="card-header">
-                                            <i className="fas fa-table mr-1" /> Data Kelurahan
+                                            <i className="fas fa-table mr-1" /> Data Kegiatan
 
-                                            <button type="button" id="btnKelurahan" className="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                                            <button type="button" id="btnKegiatan" className="btn btn-success" data-toggle="modal" data-target="#exampleModal">
                                                 <i className="fas fa-plus mr-1" />Tambah
                                             </button>
+                                            
 
                                         </div>
                                         <div className="card-body">
@@ -152,26 +161,33 @@ class Kelurahan extends Component {
                                                 <table className="table table-bordered" id="dataTable" width="100%" cellSpacing={0}>
                                                     <thead>
                                                         <tr>
+                                                            <th>Tanggal</th>
                                                             <th>Provinsi</th>
-                                                            <th>Kota</th>
+                                                            <th>Kota/Kab.</th>
                                                             <th>Kecamatan</th>
-                                                            <th>Kelurahan</th>
+                                                            <th>Des/Kel.</th>
+                                                            <th>Tanggal Bencana</th>
+                                                            <th>Bencana</th>
                                                             <th>Aksi</th>
                                                         </tr>
                                                     </thead>
 
                                                     <tbody>
-                                                        {this.props.kelurahanData &&
-                                                            this.props.kelurahanData.map((k, index)=>{
+                                                        {this.props.kegiatanData &&
+                                                            this.props.kegiatanData.map((k, index)=>{
                                                                 return(
                                                                 
                                                                     <tr key={index}>
+                                                                        <td>{k.tanggalKegiatan}</td>
                                                                         <td>{k.provinsi}</td>
                                                                         <td>{k.kota}</td>
                                                                         <td>{k.kecamatan}</td>
                                                                         <td>{k.kelurahan}</td>
+                                                                        <td>{k.tanggalBencana}</td>
+                                                                        <td>{k.bencana}</td>
                                                                         
                                                                         <td>
+                                                                            <Button id="detail" className="btn btn-primary" >Detail</Button>
                                                                             <Button id="sunting" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onClick={this.sunting}>Sunting</Button>
                                                                             <Button id="hapus" className="btn btn-danger" onClick={this.hapusData}>Hapus</Button>
                                                                         </td>
@@ -198,7 +214,7 @@ class Kelurahan extends Component {
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="exampleModalLabel">Form Kelurahan</h5>
+                                <h5 className="modal-title" id="exampleModalLabel">Form Kegiatan</h5>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
@@ -244,8 +260,49 @@ class Kelurahan extends Component {
                             </div>
                             <div className="modal-body">
                                 <Label className="required">Nama Kelurahan</Label>
-                                <Input type="text" disabled={this.state.disabled} name="kelurahan" className="form-control" placeholder="Masukkan Nama Kelurahan" value={kelurahan} onChange={this.setValue} />
+                                <select name="kelurahan" className="form-control" disabled={this.state.disabled} value={kelurahan} onChange={this.setValue} >
+                                    <option value="">Pilih Kelurahan</option>
+                                {
+                                    this.props.kelurahanData.map(
+                                        (Item, idx) =>
+                                        <option value={Item.kelurahan} key={idx}>{Item.kelurahan}</option>
+                                    )
+                                }
+                                </select>
                                 
+                            </div>
+                            <div className="modal-body">
+                                <Label className="required">Jenis Bencana</Label>
+                                <select name="bencana" className="form-control" disabled={this.state.disabled} value={bencana} onChange={this.setValue} >
+                                    <option value="">Pilih Bencana</option>
+                                {
+                                    this.props.bencanaData.map(
+                                        (Item, idx) =>
+                                        <option value={Item.bencana} key={idx}>{Item.bencana}</option>
+                                    )
+                                }
+                                </select>
+                                
+                            </div>
+                            <div className="modal-body">
+                                <Label className="required">Tanggal Kejadian</Label>
+                                <Input type="datetime-local" disabled={this.state.disabled} name="tanggalBencana" className="form-control"  value={tanggalBencana} onChange={this.setValue} />
+                            </div>
+                            <div className="modal-body">
+                                <Label className="required">Tanggal Kegiatan</Label>
+                                <Input type="date" disabled={this.state.disabled} name="tanggalKegiatan" className="form-control"  value={tanggalKegiatan} onChange={this.setValue} />
+                            </div>
+                            <div className="modal-body">
+                                <Label className="required">Bantuan yang diberikan</Label>
+                                {
+                                    this.props.bantuanData.map(
+                                        (b,idx)=>
+                                        <div className="modal-body">
+                                        <Input type="checkbox" disabled={this.state.disabled} name="bantuan" className="form-control"  value={bantuan} onChange={this.setValue} ></Input>
+                                        <Label>{b.bantuan}</Label>
+                                        </div>
+                                    )
+                                }
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -265,16 +322,19 @@ const mapStateToProps = state => ({
     kotaData: state.KReducer.dataKota,
     provinsiData: state.PReducer.dataProvinsi,
     kecamatanData: state.KecReducer.dataKecamatan,
-    kelurahanData: state.KelReducer.dataKelurahan
+    kelurahanData: state.KelReducer.dataKelurahan,
+    bantuanData: state.BanReducer.dataBantuan,
+    bencanaData: state.BReducer.dataBencana,
+    kegiatanData:state.KegReducer.dataKegiatan
   })
   
   const mapDispatchToProps = dispatch => {
     return {
-      simpanKelurahan: (data)=> dispatch({type:"TAMBAH_KELURAHAN", payload: data}),
-      hapusKelurahan: (data)=> dispatch({type:"HAPUS_KELURAHAN", payload: data}),
-      suntingKelurahan: (data)=> dispatch({type:"SUNTING_KELURAHAN", payload: data}),
+      simpanKegiatan: (data)=> dispatch({type:"TAMBAH_KEGIATAN", payload: data}),
+      hapusKegiatan: (data)=> dispatch({type:"HAPUS_KEGIATAN", payload: data}),
+      suntingKegiatan: (data)=> dispatch({type:"SUNTING_KEGIATAN", payload: data}),
     
     }
   }
   
-  export default connect(mapStateToProps, mapDispatchToProps)(Kelurahan);
+  export default connect(mapStateToProps, mapDispatchToProps)(Kegiatan);

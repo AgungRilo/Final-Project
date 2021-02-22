@@ -3,6 +3,10 @@ let defaultState = {
         {
             provinsi:"Jawa Barat",
             kota:"Depok"
+        },
+        {
+            provinsi:"Jawa Barat",
+            kota:"Bekasi"
         }
     ]
 }
@@ -39,7 +43,7 @@ const kotaReducer = (state = defaultState, action)=>{
             newKotaSunting[action.payload.index].kota = action.payload.kota;
 
             return{
-                dataKota:newKota
+                dataKota:newKotaSunting
             }
         default:
             return state

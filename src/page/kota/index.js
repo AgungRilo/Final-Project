@@ -11,7 +11,9 @@ class Kota extends Component {
             kota:"",
             kondisi:0,
             index:"",
-            kotaEdit:{}
+            kotaEdit:{},
+            disable:true,
+            statusEdit : false
             // idx:""
         }
     }
@@ -19,6 +21,11 @@ class Kota extends Component {
         this.setState({
             [el.target.name]: el.target.value
         })
+        if(el.target.value !=""){
+            this.setState({
+                disable:false
+            })
+        }
 
     }
 
@@ -26,9 +33,8 @@ class Kota extends Component {
         let obj=this.state
 
         if (this.state.kondisi === 0) {
-            if (obj.kota === "") {
-                alert("Nama kota tidak boleh kosong !")
-                
+            if (obj.kota === "" || obj.provinsi === "") {
+                alert("Data tidak boleh kosong !")       
             } else {
                 const idxKota = this.props.kotaData.findIndex(x => x.kota === this.state.kota)
                 console.log("index",idxKota);
@@ -46,7 +52,7 @@ class Kota extends Component {
         } else {
             this.props.suntingKota(obj)
             this.setState({
-                kondisi:0
+                statusEdit:false
             });
             el.preventDefault()
             this.clear()
@@ -80,12 +86,14 @@ class Kota extends Component {
 
 
     sunting = (index) => {
+        console.log("index nih,",index);
         this.setState({
           kondisi: 1,
-          index: index
+          index: index,
+          statusEdit:true
         });
     
-        const dataEdit=this.props.dataKota[index];
+        let dataEdit=this.props.kotaData[index];
       
         this.setState({
           kotaEdit: dataEdit
@@ -106,12 +114,14 @@ class Kota extends Component {
     render() {
         console.log(this.props.provinsiData);
         
-        if("kota" in this.state.kotaEdit){
+        if(this.state.statusEdit){
             this.setState({
                 kota:this.state.kotaEdit.kota,
+                provinsi:this.state.kotaEdit.provinsi,
+                statusEdit:false
                 
             })
-            this.reset();
+            // this.reset();
         }
         const {kota, provinsi}=this.state
         return (
@@ -125,7 +135,7 @@ class Kota extends Component {
                                         <div className="card-header">
                                             <i className="fas fa-table mr-1" /> Data Kota
 
-                                            <button type="button" className="right" data-toggle="modal" data-target="#exampleModal">
+                                            <button type="button" id="btnKota" className="btn btn-success" data-toggle="modal" data-target="#exampleModal">
                                                 <i className="fas fa-plus mr-1" />Tambah
                                             </button>
 
@@ -152,8 +162,8 @@ class Kota extends Component {
                                                                         <td>{k.kota}</td>
                                                                         
                                                                         <td>
-                                                                            <Button id="sunting" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onClick={this.sunting}>Sunting</Button>
-                                                                            <Button id="hapus" className="btn btn-danger" onClick={this.hapusData}>Hapus</Button>
+                                                                        <Button dataToogle="modal" dataTarget="#exampleModal" id="sunting" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onClick={()=>{this.sunting(index)}}>Sunting</Button>
+                                                                            <Button id="hapus" className="btn btn-danger" onClick={()=>{this.hapusData(index)}}>Hapus</Button>
                                                                         </td>
                                                                     </tr>
                                                                 )
@@ -184,26 +194,29 @@ class Kota extends Component {
                                 </button>
                             </div>
                             <div className="modal-body">
-                                <Label>Nama Kota</Label>
+                                
+
+                                <Label className="required">Nama Kecamatan</Label>
                                 <select name="provinsi" className="form-control" value={provinsi} onChange={this.setValue} >
                                     <option value="">Pilih Provinsi</option>
                                 {
                                     this.props.provinsiData.map(
                                         (Item, idx) =>
                                         <option value={Item.provinsi} key={idx}>{Item.provinsi}</option>
-                                    )
-                                }
+                                        )
+                                    }
                                 </select>
-                                
-                            </div>
-                            <div className="modal-body">
-                                <Label>Nama Kota</Label>
+                                </div>
+                                <div className="modal-body">
+                            
+                                    
+                                <Label className="required">Nama Kota</Label>
                                 <Input type="text" name="kota" className="form-control" placeholder="Masukkan Nama Kota" value={kota} onChange={this.setValue} ></Input>
                                 
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                <button type="button" className="btn btn-primary" onClick={this.simpan}>Simpan</button>
+                                <button type="button" className="btn btn-primary" disabled={this.state.disable} onClick={this.simpan}>Simpan</button>
                             </div>
                         </div>
                     </div>

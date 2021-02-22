@@ -51,9 +51,9 @@ const bencanaReducer = (state = defaultState, action) => {
             let newBencanaSunting=state.dataBencana
             newBencanaSunting[action.payload.index].bencana = action.payload.bencana;
             newBencanaSunting[action.payload.index].deskripsi = action.payload.deskripsi;
-                
+            console.log(newBencanaSunting);
             return{
-                dataBencana:newBencana
+                dataBencana:newBencanaSunting
             }
 
         

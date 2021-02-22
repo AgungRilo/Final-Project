@@ -6,19 +6,16 @@ class AppValidation extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            currentPage:"login"
+            
          }
     }
 
-    goToPage = page =>{
-        this.setState({
-          currentPage:page
-        })
-      }
+    
+      
     render() { 
         return ( 
             <Router>
-                <Validation page={this.state.currentPage}/>
+                <Validation/>
             </Router>
          );
     }

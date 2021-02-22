@@ -22,7 +22,7 @@ class Header extends Component {
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fas fa-user fa-fw" /></a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                                <a className="dropdown-item" href="#">Admin</a>
+                                <div className="dropdown-item" >{this.props.login.username}</div>
                                 <div className="dropdown-divider" />
                                 <Link to="/logout">
                                 <div className="dropdown-item"  onClick={this.props.logoutEvent} >Logout</div>
@@ -40,7 +40,8 @@ class Header extends Component {
 
 //ketika mengambil data dari luar kelas
 const mapStateToProps = state => ({
-    
+    login:state.AReducer.dataUser
+
 
 })
 //mengubah data kereducer

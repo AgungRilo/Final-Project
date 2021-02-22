@@ -62,19 +62,31 @@ class Nav extends Component {
                               <div className="nav-link" >Provinsi</div>
                             </Link>
                             <Link to="/kota">
-                              <a className="nav-link" href="layout-sidenav-light.html">Kota</a>
+                              <div className="nav-link" >Kota</div>
                             </Link>
                             <Link to="/kecamatan">
-                              <a className="nav-link" href="layout-sidenav-light.html">Kecamatan</a>
+                              <div className="nav-link" >Kecamatan</div>
                             </Link>
-                            <a className="nav-link" href="layout-sidenav-light.html">Kelurahan</a>
-                            <a className="nav-link" href="layout-sidenav-light.html">Bantuan</a>
+                            <Link to="/kelurahan">
+                              <div className="nav-link" >Kelurahan</div>
+                            </Link>
+                            <Link to="/bantuan">
+                            <div className="nav-link" >Bantuan</div>
+                            </Link>
                           </nav>
                         </div>
-                        <a className="nav-link" href="index.html">
-                          <div className="sb-nav-link-icon"><i className="fas fa-book-open" /></div>
-              Kegiatan
-            </a>
+                        <Link to="/kegiatan">
+                        <div className="nav-link" >
+                          <div className="sb-nav-link-icon"><i className="fas fa-book-open" />
+                          </div>Kegiatan
+                        </div>
+                        </Link>
+                        <Link to="/laporan">
+                        <div className="nav-link" >
+                          <div className="sb-nav-link-icon"><i className="fas fa-book-open" />
+                          </div>Laporan
+                        </div>
+                        </Link>
                       </div>
                     </div>
                     <div className="sb-sidenav-footer">

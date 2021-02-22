@@ -1,6 +1,15 @@
 let defaultState = {
     dataKecamatan:[
-        
+        {
+            provinsi:"Jawa Barat",
+            kota:"Depok",
+            kecamatan:"Cilodong"
+        },
+        {
+            provinsi:"Jawa Barat",
+            kota:"Bekasi",
+            kecamatan:"Setu"
+        }
     ]
 }
 

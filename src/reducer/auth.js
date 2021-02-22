@@ -15,10 +15,10 @@ const authReducer = (state = defaultState, action) => {
         case "LOGIN_SUCCESS":
             return {
                 isLogin: true,
-                // dataUser:{
-                //     username: action.payload.dataUser.username,
-                //     email:action.payload.dataUser.email
-                // }
+                dataUser:{
+                    username: action.payload.user.username,
+                    email:action.payload.user.email
+                }
             }
         
         case "LOGOUT_SUCCESS":

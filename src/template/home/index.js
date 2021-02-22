@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import merapi from '../../asset/merapi.jpg';
-import tsunami from '../../asset/tsunami.jpg';
+import tsunami from '../../asset/tsunamii.jpg';
 import longsor from '../../asset/longsor.jpg';
 import banjir from '../../asset/banjir.jpg';
 
@@ -41,12 +41,12 @@ class Home extends Component {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-xl-6">
+                                <div className="col-xl-6" id="tentang">
                                     <div className="card mb-4">
                                         <div className="card-header">
                                             <i className="fas fa-user mr-1" /> Tentang Kami
                                         </div><div className="about">Aplikasi ini diciptakan untuk mengorganisir bantuan - bantuan bencana alam</div>
-                                        <div className="card-body"><canvas id="myAreaChart" width="100%" height={40} /></div>
+                                        <div className="card-body"></div>
                                     </div>
                                 </div>
                                 

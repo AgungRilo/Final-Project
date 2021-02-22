@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 
 import { Label, Input, Button, Main,I } from '../../component';
 import { connect } from 'react-redux';
-import './style.css';
 
-class Bencana extends Component {
+
+class Bantuan extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            bencana: "",
+            bantuan: "",
             deskripsi: "",
+            nominal:"",
             kondisi: 0,
             index: "",
-            bencanaEdit: {},
-            statusEdit : false
+            bantuanEdit: {}
             // idx:""
         }
     }
@@ -28,27 +28,27 @@ class Bencana extends Component {
         let obj = this.state
 
         if (this.state.kondisi === 0) {
-            if (obj.bencana === "") {
-                alert("Nama bencana tidak boleh kosong !")
+            if (obj.bantuan === "") {
+                alert("Nama bantuan tidak boleh kosong !")
 
             } else {
-                const idxBencana = this.props.bencanaData.findIndex(x => x.bencana === this.state.bencana)
-                console.log("index", idxBencana);
-                console.log("bencana data", this.props.bencanaData);
+                const idxBantuan = this.props.bantuanData.findIndex(x => x.bantuan === this.state.bantuan)
+                console.log("index", idxBantuan);
+                console.log("Bantuan data", this.props.bantuanData);
 
-                if (idxBencana >= 0) {
-                    alert("Nama bencana sudah ada !!")
+                if (idxBantuan >= 0) {
+                    alert("Nama bantuan sudah ada !!")
                 } else {
-                    this.props.simpanBencana(obj);
+                    this.props.simpanBantuan(obj);
                     el.preventDefault()
                     this.clear()
                     alert("Data berhasil tersimpan !!")
                 }
             }
         } else {
-            this.props.suntingBencana(obj)
+            this.props.suntingBantuan(obj)
             this.setState({
-                statusEdit: false
+                kondisi: 0
             });
             el.preventDefault()
             this.clear()
@@ -60,18 +60,19 @@ class Bencana extends Component {
 
     clear = () => {
         this.setState({
-            bencana: "",
-            deskripsi: ""
+            bantuan: "",
+            deskripsi: "",
+            nominal:""
         })
     }
 
     hapusData = (index) => {
         if (window.confirm("Apakah anda ingin menghapus data ini ?")) {
 
-            let bencanaBaru = this.props.bencanaData;
+            let bantuanBaru = this.props.BantuanData;
 
-            console.log(bencanaBaru);
-            this.props.hapusBencana({ bencanaUpdate: bencanaBaru,index:index })
+            console.log(bantuanBaru);
+            this.props.hapusBantuan({ bantuanUpdate: bantuanBaru })
 
             alert("Berhasil Menghapus Data !!");
         }
@@ -81,24 +82,22 @@ class Bencana extends Component {
 
 
     sunting = (index) => {
-        console.log("index",index);
         this.setState({
             kondisi: 1,
-            index: index, 
-            statusEdit : true
+            index: index
         });
-        console.log("redux", this.props.bencanaData[index]);
-        let dataEdit = this.props.bencanaData[index];
+
+        const dataEdit = this.props.dataBantuan[index];
 
         this.setState({
-            bencanaEdit: dataEdit
+            bantuanEdit: dataEdit
         })
 
     }
 
     reset = () => {
         this.setState({
-            bencanaEdit: {}
+            bantuanEdit: {}
         })
     }
 
@@ -107,16 +106,16 @@ class Bencana extends Component {
     }
 
     render() {
-        console.log("data b encacna", this.state.bencanaEdit);
-        if (this.state.statusEdit) {
+        console.log("data b encacna", this.props.bantuanData);
+        if ("bantuan" in this.state.bantuanEdit) {
             this.setState({
-                bencana: this.state.bencanaEdit.bencana,
-                deskripsi: this.state.bencanaEdit.deskripsi,
-                statusEdit: false
+                bantuan: this.state.bantuanEdit.bantuan,
+                deskripsi: this.state.bantuanEdit.deskripsi,
+                nominal: this.state.bantuanEdit.nominal,
             })
-            
+            this.reset();
         }
-        const { bencana, deskripsi } = this.state
+        const { bantuan, deskripsi,nominal } = this.state
         return (
             <>
                 <div>
@@ -126,9 +125,9 @@ class Bencana extends Component {
                                 <div className="container-fluid" id="container">
                                     <div className="card mb-4">
                                         <div className="card-header">
-                                            <I className="fas fa-table mr-1" /> Data Bencana
+                                            <I className="fas fa-table mr-1" /> Data Bantuan
 
-                                            <button type="button" className="btn btn-success" id="btnBencana" data-toggle="modal" data-target="#exampleModal">
+                                            <button type="button" id="btnBantuan" className="btn btn-success" data-toggle="modal" data-target="#exampleModal">
                                                 <I className="fas fa-plus mr-1" />Tambah
                                             </button>
 
@@ -140,24 +139,26 @@ class Bencana extends Component {
                                                     <thead>
                                                         <tr>
 
-                                                            <th>Nama Bencana</th>
+                                                            <th>Nama Bantuan</th>
                                                             <th>Deskripsi</th>
+                                                            <th>Nominal</th>
                                                             <th>Aksi</th>
                                                         </tr>
                                                     </thead>
 
                                                     <tbody>
-                                                        {this.props.bencanaData &&
-                                                            this.props.bencanaData.map((a, index) => {
+                                                        {this.props.bantuanData &&
+                                                            this.props.bantuanData.map((a, index) => {
                                                                 return (
 
                                                                     <tr key={index}>
 
-                                                                        <td>{a.bencana}</td>
+                                                                        <td>{a.bantuan}</td>
                                                                         <td>{a.deskripsi}</td>
+                                                                        <td>{a.nominal}</td>
                                                                         <td>
-                                                                            <Button dataToogle="modal" dataTarget="#exampleModal" id="sunting" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onClick={()=>{this.sunting(index)}}>Sunting</Button>
-                                                                            <Button id="hapus" className="btn btn-danger" onClick={()=>{this.hapusData(index)}}>Hapus</Button>
+                                                                            <Button id="sunting" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onClick={this.sunting}>Sunting</Button>
+                                                                            <Button id="hapus" className="btn btn-danger" onClick={this.hapusData}>Hapus</Button>
                                                                         </td>
                                                                     </tr>
                                                                 )
@@ -182,20 +183,18 @@ class Bencana extends Component {
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="exampleModalLabel">Form Bencana</h5>
+                                <h5 className="modal-title" id="exampleModalLabel">Form Bantuan</h5>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
                             <div className="modal-body">
-                                    <div>
-
-                                    <Label className="required">Nama Bencana</Label>
-                                    <Input type="text" name="bencana" className="form-control" placeholder="Masukkan Nama Bencana" value={bencana} onChange={this.setValue} ></Input>
-                                    </div>
-                                    <Label>Deskripsi</Label>
-                                    <Input type="text" name="deskripsi" className="form-control" placeholder="Masukkan Deskripsi" value={deskripsi} onChange={this.setValue} ></Input>
-                                
+                                <Label className="required">Nama Bantuan</Label>
+                                <Input type="text" name="bantuan" className="form-control" placeholder="Masukkan Nama Bantuan" value={bantuan} onChange={this.setValue} />
+                                <Label>Deskripsi</Label>
+                                <Input type="text" name="deskripsi" className="form-control" placeholder="Masukkan Deskripsi" value={deskripsi} onChange={this.setValue} />
+                                <Label>Nominal</Label>
+                                <Input type="number" name="nominal" min="1" className="form-control" placeholder="Masukkan Nominal" value={nominal} onChange={this.setValue} />
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -212,16 +211,16 @@ class Bencana extends Component {
 }
 
 const mapStateToProps = state => ({
-    bencanaData: state.BReducer.dataBencana
+    bantuanData: state.BanReducer.dataBantuan
 })
 
 const mapDispatchToProps = dispatch => {
     return {
-        simpanBencana: (data) => dispatch({ type: "TAMBAH_BENCANA", payload: data }),
-        hapusBencana: (data) => dispatch({ type: "HAPUS_BENCANA", payload: data }),
-        suntingBencana: (data) => dispatch({ type: "SUNTING_BENCANA", payload: data }),
+        simpanBantuan: (data) => dispatch({ type: "TAMBAH_BANTUAN", payload: data }),
+        hapusBantuan: (data) => dispatch({ type: "HAPUS_BANTUAN", payload: data }),
+        suntingBantuan: (data) => dispatch({ type: "SUNTING_BANTUAN", payload: data }),
 
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Bencana);
+export default connect(mapStateToProps, mapDispatchToProps)(Bantuan);

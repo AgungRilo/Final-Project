@@ -6,5 +6,22 @@ import LogOut from './logout';
 import Kota from './kota';
 import Kecamatan from './kecamatan';
 import Kelurahan from './kelurahan';
+import Bantuan from './bantuan';
+import Kegiatan from './kegiatan';
+import Laporan from './laporan';
+import Detail from './detail';
 
-export {Login,LogOut,Error,Bencana,Provinsi,Kota,Kecamatan,Kelurahan} 
+export {
+    Login,
+    LogOut,
+    Error, 
+    Bencana, 
+    Provinsi, 
+    Kota, 
+    Kecamatan, 
+    Kelurahan, 
+    Bantuan, 
+    Kegiatan, 
+    Laporan, 
+    Detail
+} 

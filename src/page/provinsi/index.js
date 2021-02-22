@@ -98,7 +98,7 @@ class Provinsi extends Component {
                                         <div className="card-header">
                                             <i className="fas fa-table mr-1" /> Data Provinsi
 
-                                            <button type="button" className="right" data-toggle="modal" data-target="#exampleModal">
+                                            <button type="button" id="btnProvinsi" className="btn btn-success" data-toggle="modal" data-target="#exampleModal">
                                                 <i className="fas fa-plus mr-1" />Tambah
                                             </button>
 
@@ -155,8 +155,11 @@ class Provinsi extends Component {
                                 </button>
                             </div>
                             <div className="modal-body">
-                                <Label>Nama Provinsi</Label>
+                                <div>
+
+                                <Label className="required">Nama Provinsi</Label>
                                 <Input type="text" name="provinsi" className="form-control" placeholder="Masukkan Nama Provinsi" value={provinsi} onChange={this.setValue} ></Input>
+                                </div>
                                 
                             </div>
                             <div className="modal-footer">

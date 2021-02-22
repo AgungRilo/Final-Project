@@ -7,11 +7,11 @@ class Input extends Component {
         this.state = {  }
     }
     render() { 
-        const { value, type, name, id, className, placeholder, onChange} = this.props
+        const { value,pattern, type, name, id, className, placeholder, onChange} = this.props
         return ( 
-            <div>
-                <input type={type} value={value} id={id} name={name} className={className} placeholder={placeholder} onChange={onChange} />
-            </div>
+            
+                <input pattern={pattern} type={type} value={value} id={id} name={name} className={className} placeholder={placeholder} onChange={onChange} />
+            
          );
     }
 }

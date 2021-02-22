@@ -7,10 +7,10 @@ class Label extends Component {
         this.state = {  }
     }
     render() { 
-        const {children}=this.props
+        const {children, className}=this.props
         return ( 
             
-                <label>{children}</label>
+                <label className={className}>{children}</label>
             
          );
     }
