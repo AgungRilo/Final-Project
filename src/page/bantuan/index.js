@@ -13,7 +13,8 @@ class Bantuan extends Component {
             nominal:"",
             kondisi: 0,
             index: "",
-            bantuanEdit: {}
+            bantuanEdit: {},
+            statusEdit:false
             // idx:""
         }
     }
@@ -48,7 +49,7 @@ class Bantuan extends Component {
         } else {
             this.props.suntingBantuan(obj)
             this.setState({
-                kondisi: 0
+                statusEdit:false
             });
             el.preventDefault()
             this.clear()
@@ -72,7 +73,7 @@ class Bantuan extends Component {
             let bantuanBaru = this.props.BantuanData;
 
             console.log(bantuanBaru);
-            this.props.hapusBantuan({ bantuanUpdate: bantuanBaru })
+            this.props.hapusBantuan({ bantuanUpdate: bantuanBaru,index:index })
 
             alert("Berhasil Menghapus Data !!");
         }
@@ -82,17 +83,13 @@ class Bantuan extends Component {
 
 
     sunting = (index) => {
+        const dataEdit = this.props.bantuanData[index];
         this.setState({
+            bantuanEdit: dataEdit,
             kondisi: 1,
-            index: index
+            index: index,
+            statusEdit:true
         });
-
-        const dataEdit = this.props.dataBantuan[index];
-
-        this.setState({
-            bantuanEdit: dataEdit
-        })
-
     }
 
     reset = () => {
@@ -107,13 +104,14 @@ class Bantuan extends Component {
 
     render() {
         console.log("data b encacna", this.props.bantuanData);
-        if ("bantuan" in this.state.bantuanEdit) {
+        if (this.state.statusEdit) {
             this.setState({
                 bantuan: this.state.bantuanEdit.bantuan,
                 deskripsi: this.state.bantuanEdit.deskripsi,
                 nominal: this.state.bantuanEdit.nominal,
+                statusEdit:false
             })
-            this.reset();
+            // this.reset();
         }
         const { bantuan, deskripsi,nominal } = this.state
         return (
@@ -135,7 +133,7 @@ class Bantuan extends Component {
                                         <div className="card-body">
                                             <div className="table-responsive">
 
-                                                <table className="table table-bordered" id="dataTable" width="100%" cellSpacing={0}>
+                                                <table className="table table-bordered" width="100%" cellSpacing={0}>
                                                     <thead>
                                                         <tr>
 
@@ -157,8 +155,8 @@ class Bantuan extends Component {
                                                                         <td>{a.deskripsi}</td>
                                                                         <td>{a.nominal}</td>
                                                                         <td>
-                                                                            <Button id="sunting" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onClick={this.sunting}>Sunting</Button>
-                                                                            <Button id="hapus" className="btn btn-danger" onClick={this.hapusData}>Hapus</Button>
+                                                                            <Button dataToogle="modal" dataTarget="#exampleModal" id="sunting" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onClick={()=>{this.sunting(index)}}>Sunting</Button>
+                                                                            <Button id="hapus" className="btn btn-danger" onClick={()=>{this.hapusData(index)}}>Hapus</Button>
                                                                         </td>
                                                                     </tr>
                                                                 )

@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { Label,Input,Button } from '../../component';
 import { connect } from 'react-redux';
 import bencana from '../bencana';
+import { Link } from 'react-router-dom';
+import detail from '../detail';
 
 class Kegiatan extends Component {
     constructor(props) {
@@ -18,7 +20,8 @@ class Kegiatan extends Component {
             kondisi:0,
             index:"",
             kegiatanEdit:{},
-            disabled  :true
+            disabled  :true,
+            statusEdit: false
             // idx:""
 
         }
@@ -60,7 +63,7 @@ class Kegiatan extends Component {
         } else {
             this.props.suntingKegiatan(obj)
             this.setState({
-                kondisi:0
+                statusEdit: false
             });
             el.preventDefault()
             this.clear()
@@ -68,7 +71,25 @@ class Kegiatan extends Component {
         }
     }
 
+    // detail = (id) => {
 
+        
+    //     let find = this.props.detailKegiatan.filter(dataKegiatanDetail => {
+    //         return dataKegiatanDetail.
+    //     })
+    //     let find1 = dataKegiatanDetail.filter(users => {
+    //         return 
+    //     })
+    //     console.log("find1",find1[0]);
+    //     console.log("find", find);
+
+    //     if (find.length > 0) {
+            
+    //         this.props.submitLogin( {user: find1[0]} )
+    //         this.props.history.push("/")
+    //     }
+    //     // e.preventDefault()
+    // }
     
     clear = () => {
         this.setState({ 
@@ -84,31 +105,28 @@ class Kegiatan extends Component {
     }
 
     hapusData = (index) => {
-        if(window.confirm("Apakah anda ingin menghapus data ini ?")){
+        if (window.confirm("Apakah anda ingin menghapus data ini ?")) {
 
             let kegiatanBaru = this.props.kegiatanData;
-            
+
             console.log(kegiatanBaru);
-            this.props.hapuskegiatan({kegiatanUpdate : kegiatanBaru})
-            
+            this.props.hapusKegiatan({ kegiatanUpdate: kegiatanBaru, index: index })
+
             alert("Berhasil Menghapus Data !!");
         }
         this.setState({})
-        
+
     }
 
 
     sunting = (index) => {
+        const dataEdit=this.props.kegiatanData[index];
         this.setState({
           kondisi: 1,
-          index: index
+          index: index,
+          kegiatanEdit: dataEdit,
+          statusEdit:true
         });
-    
-        const dataEdit=this.props.dataKegiatan[index];
-      
-        this.setState({
-          kegiatanEdit: dataEdit
-        })
       
       }
     
@@ -128,14 +146,18 @@ class Kegiatan extends Component {
         console.log(this.props.kecamatanData);
         console.log(this.props.kegiatanData);
         
-        console.log("data b encacna", this.props.kegiatanData);
-        if ("kegiatan" in this.state.kegiatanEdit) {
+        console.log("data bencacna", this.props.kegiatanData);
+        if (this.state.statusEdit) {
             this.setState({
+                provinsi: this.state.kegiatanEdit.provinsi,
+                kota: this.state.kegiatanEdit.kota,
+                kecamatan: this.state.kegiatanEdit.kecamatan,
                 tanggalKegiatan: this.state.kegiatanEdit.tanggalKegiatan,
                 tanggalBencana: this.state.kegiatanEdit.tanggalBencana,
-                deskripsi: this.state.kegiatanEdit.deskripsi
+                deskripsi: this.state.kegiatanEdit.deskripsi,
+                statusEdit:false
             })
-            this.reset();
+            // this.reset();
         }
         const {kota, provinsi,kecamatan,kelurahan,tanggalBencana,tanggalKegiatan,bantuan,bencana}=this.state
         return (
@@ -158,7 +180,7 @@ class Kegiatan extends Component {
                                         <div className="card-body">
                                             <div className="table-responsive">
                                             
-                                                <table className="table table-bordered" id="dataTable" width="100%" cellSpacing={0}>
+                                                <table className="table table-bordered" width="100%" cellSpacing={0}>
                                                     <thead>
                                                         <tr>
                                                             <th>Tanggal</th>
@@ -183,13 +205,16 @@ class Kegiatan extends Component {
                                                                         <td>{k.kota}</td>
                                                                         <td>{k.kecamatan}</td>
                                                                         <td>{k.kelurahan}</td>
-                                                                        <td>{k.tanggalBencana}</td>
+                                                                        <td>{k.tanggalBencana.substr(0,10)}</td>
                                                                         <td>{k.bencana}</td>
                                                                         
                                                                         <td>
-                                                                            <Button id="detail" className="btn btn-primary" >Detail</Button>
-                                                                            <Button id="sunting" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onClick={this.sunting}>Sunting</Button>
-                                                                            <Button id="hapus" className="btn btn-danger" onClick={this.hapusData}>Hapus</Button>
+                                                                            <Link to="/detail">
+
+                                                                            <Button id="detail" className="btn btn-primary" onClick={() => { this.detail() }} >Detail</Button>
+                                                                            </Link>
+                                                                            <Button dataToogle="modal" dataTarget="#exampleModal" id="sunting" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onClick={() => { this.sunting(index) }}>Sunting</Button>
+                                                                            <Button id="hapus" className="btn btn-danger" onClick={() => { this.hapusData(index) }}>Hapus</Button>
                                                                         </td>
                                                                     </tr>
                                                                 )
@@ -306,7 +331,7 @@ class Kegiatan extends Component {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                <button type="button" className="btn btn-primary"  disabled={this.state.disabled}  onClick={this.simpan}>Simpan</button>
+                                <button type="button" className="btn btn-primary"   onClick={this.simpan}>Simpan</button>
                             </div>
                         </div>
                     </div>
@@ -333,7 +358,7 @@ const mapStateToProps = state => ({
       simpanKegiatan: (data)=> dispatch({type:"TAMBAH_KEGIATAN", payload: data}),
       hapusKegiatan: (data)=> dispatch({type:"HAPUS_KEGIATAN", payload: data}),
       suntingKegiatan: (data)=> dispatch({type:"SUNTING_KEGIATAN", payload: data}),
-    
+      detailKegiatan:(data)=> dispatch({type:"DETAIL", payload: data})
     }
   }
   

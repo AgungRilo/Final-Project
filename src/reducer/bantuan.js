@@ -56,7 +56,7 @@ const bantuanReducer = (state = defaultState, action) => {
             newBantuanSunting[action.payload.index].nominal = action.payload.nominal
                 
             return{
-                dataBantuan:newBantuan
+                dataBantuan:newBantuanSunting
             }
 
         

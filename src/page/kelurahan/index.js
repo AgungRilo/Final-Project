@@ -93,17 +93,13 @@ class Kelurahan extends Component {
 
 
     sunting = (index) => {
-        this.setState({
-          kondisi: 1,
-          index: index,
-          statusEdit:true
-        });
-    
         const dataEdit=this.props.kelurahanData[index];
-      
         this.setState({
-          kelurahanEdit: dataEdit
-        })
+            kelurahanEdit: dataEdit,
+            kondisi: 1,
+            index: index,
+            statusEdit:true
+        });
       
       }
     
@@ -126,6 +122,9 @@ class Kelurahan extends Component {
         console.log("data b encacna", this.props.bencanaData);
         if (this.state.statusEdit) {
             this.setState({
+                provinsi:this.state.kelurahanEdit.provinsi,
+                kota:this.state.kelurahanEdit.kota,
+                kecamatan:this.state.kelurahanEdit.kecamatan,
                 kelurahan: this.state.kelurahanEdit.kelurahan,
                 deskripsi: this.state.kelurahanEdit.deskripsi,
                 statusEdit:false
@@ -152,13 +151,13 @@ class Kelurahan extends Component {
                                         <div className="card-body">
                                             <div className="table-responsive">
                                             
-                                                <table className="table table-bordered" id="dataTable" width="100%" cellSpacing={0}>
+                                                <table className="table table-bordered" width="100%" cellSpacing={0}>
                                                     <thead>
                                                         <tr>
                                                             <th>Provinsi</th>
-                                                            <th>Kota</th>
+                                                            <th>Kota/Kab.</th>
                                                             <th>Kecamatan</th>
-                                                            <th>Kelurahan</th>
+                                                            <th>Des/Kel.</th>
                                                             <th>Aksi</th>
                                                         </tr>
                                                     </thead>

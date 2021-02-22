@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 
-import { Label,Input,Button } from '../../component';
+import { Label, Input, Button } from '../../component';
 import { connect } from 'react-redux';
 
 class Kecamatan extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            kecamatan:"",
-            provinsi:"",
-            kota:"",
-            kondisi:0,
-            index:"",
-            kecamatanEdit:{},
-            disabled  :true,
-            statusEdit : false
+            kecamatan: "",
+            provinsi: "",
+            kota: "",
+            kondisi: 0,
+            index: "",
+            kecamatanEdit: {},
+            disabled: true,
+            statusEdit: false
             // idx:""
 
         }
@@ -24,7 +24,7 @@ class Kecamatan extends Component {
             [el.target.name]: el.target.value
         })
 
-        if(el.target.value != ""){
+        if (el.target.value != "") {
             this.setState({
                 disabled: false
             })
@@ -33,20 +33,20 @@ class Kecamatan extends Component {
     }
 
     simpan = el => {
-        let obj=this.state
+        let obj = this.state
 
         if (this.state.kondisi === 0) {
-            if (obj.kota === "" || obj.provinsi === "" || obj.kecamatan==="") {
+            if (obj.kota === "" || obj.provinsi === "" || obj.kecamatan === "") {
                 alert("Data tidak boleh kosong !!")
-                
+
             } else {
                 const idxKecamatan = this.props.kecamatanData.findIndex(x => x.kecamatan === this.state.kecamatan)
-                console.log("index",idxKecamatan);
-                console.log("bencana data",this.props.kecamtanData);
-            
-                if(idxKecamatan >=0){
+                console.log("index", idxKecamatan);
+                console.log("bencana data", this.props.kecamtanData);
+
+                if (idxKecamatan >= 0) {
                     alert("Nama kota sudah ada !!")
-                }else{
+                } else {
                     this.props.simpanKecamatan(obj);
                     el.preventDefault()
                     this.clear()
@@ -56,7 +56,7 @@ class Kecamatan extends Component {
         } else {
             this.props.suntingKecamatan(obj)
             this.setState({
-                statusEdit:false
+                statusEdit: false
             });
             el.preventDefault()
             this.clear()
@@ -65,70 +65,70 @@ class Kecamatan extends Component {
     }
 
 
-    
+
     clear = () => {
-        this.setState({ 
-          kota : "",
-          provinsi:"",
-          kecamatan:""
-          
+        this.setState({
+            kota: "",
+            provinsi: "",
+            kecamatan: ""
+
         })
     }
 
     hapusData = (index) => {
-        if(window.confirm("Apakah anda ingin menghapus data ini ?")){
+        if (window.confirm("Apakah anda ingin menghapus data ini ?")) {
 
             let kecamatanBaru = this.props.kecamatanData;
-            
+
             console.log(kecamatanBaru);
-            this.props.hapusKecamatan({kecamtanUpdate : kecamatanBaru,index:index})
-            
+            this.props.hapusKecamatan({ kecamtanUpdate: kecamatanBaru, index: index })
+
             alert("Berhasil Menghapus Data !!");
         }
         this.setState({})
-        
+
     }
 
 
     sunting = (index) => {
-        const dataEdit=this.props.kecamatanData[index];
+        const dataEdit = this.props.kecamatanData[index];
         console.log(dataEdit);
         this.setState({
             kecamatanEdit: dataEdit,
             kondisi: 1,
             index: index,
-            statusEdit:true
+            statusEdit: true
         });
-      }
-    
-      reset = ()=> {
+    }
+
+    reset = () => {
         this.setState({
-          kecamatanEdit :{}
+            kecamatanEdit: {}
         })
-      }
-    
-      refresh= ()=>{
+    }
+
+    refresh = () => {
         this.setState({})
-      }
+    }
 
     render() {
         console.log(this.props.provinsiData);
         console.log(this.props.kotaData);
         console.log(this.props.kecamatanData);
-        
-        if(this.state.statusEdit){
-            console.log("provinsi",this.state.kecamatanEdit);
+
+        if (this.state.statusEdit) {
+            console.log("provinsi", this.state.kecamatanEdit);
             this.setState({
-                kota:this.state.kecamatanEdit.kota,
-                provinsi:this.state.kecamatanEdit.provinsi,
-                kecamatan:this.state.kecamatanEdit.kecamatan,
-                statusEdit:false
+                kota: this.state.kecamatanEdit.kota,
+                provinsi: this.state.kecamatanEdit.provinsi,
+                kecamatan: this.state.kecamatanEdit.kecamatan,
+                statusEdit: false
             }, () => {
                 console.log(this.state);
             })
             // this.reset();
         }
-        const {kota, provinsi,kecamatan}=this.state
+        const { kota, provinsi, kecamatan } = this.state
         return (
             <>
                 <div>
@@ -147,12 +147,12 @@ class Kecamatan extends Component {
                                         </div>
                                         <div className="card-body">
                                             <div className="table-responsive">
-                                            
-                                                <table className="table table-bordered" id="dataTable" width="100%" cellSpacing={0}>
+
+                                                <table className="table table-bordered" width="100%" cellSpacing={0}>
                                                     <thead>
                                                         <tr>
                                                             <th>Provinsi</th>
-                                                            <th>Kota</th>
+                                                            <th>Kota/Kab.</th>
                                                             <th>Kecamatan</th>
                                                             <th>Aksi</th>
                                                         </tr>
@@ -160,23 +160,23 @@ class Kecamatan extends Component {
 
                                                     <tbody>
                                                         {this.props.kecamatanData &&
-                                                            this.props.kecamatanData.map((k, index)=>{
-                                                                return(
-                                                                
+                                                            this.props.kecamatanData.map((k, index) => {
+                                                                return (
+
                                                                     <tr key={index}>
                                                                         <td>{k.provinsi}</td>
                                                                         <td>{k.kota}</td>
                                                                         <td>{k.kecamatan}</td>
-                                                                        
+
                                                                         <td>
-                                                                            <Button dataToogle="modal" dataTarget="#exampleModal" id="sunting" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onClick={()=>{this.sunting(index)}}>Sunting</Button>
-                                                                            <Button id="hapus" className="btn btn-danger" onClick={()=>{this.hapusData(index)}}>Hapus</Button>
+                                                                            <Button dataToogle="modal" dataTarget="#exampleModal" id="sunting" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onClick={() => { this.sunting(index) }}>Sunting</Button>
+                                                                            <Button id="hapus" className="btn btn-danger" onClick={() => { this.hapusData(index) }}>Hapus</Button>
                                                                         </td>
                                                                     </tr>
                                                                 )
                                                             })
                                                         }
-                                                        
+
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -204,36 +204,36 @@ class Kecamatan extends Component {
                                 <Label className="required">Nama Provinsi</Label>
                                 <select name="provinsi" className="form-control" value={provinsi} onChange={this.setValue} >
                                     <option value="">Pilih Provinsi</option>
-                                {
-                                    this.props.provinsiData.map(
-                                        (Item, idx) =>
-                                        <option value={Item.provinsi} key={idx}>{Item.provinsi}</option>
-                                    )
-                                }
+                                    {
+                                        this.props.provinsiData.map(
+                                            (Item, idx) =>
+                                                <option value={Item.provinsi} key={idx}>{Item.provinsi}</option>
+                                        )
+                                    }
                                 </select>
-                                
+
                             </div>
                             <div className="modal-body">
                                 <Label className="required">Nama Kota</Label>
                                 <select name="kota" className="form-control" disabled={this.state.disabled} value={kota} onChange={this.setValue} >
                                     <option value="">Pilih Kota</option>
-                                {
-                                    this.props.kotaData.map(
-                                        (Item, idx) =>
-                                        <option value={Item.kota} key={idx}>{Item.kota}</option>
-                                    )
-                                }
+                                    {
+                                        this.props.kotaData.map(
+                                            (Item, idx) =>
+                                                <option value={Item.kota} key={idx}>{Item.kota}</option>
+                                        )
+                                    }
                                 </select>
-                                
+
                             </div>
                             <div className="modal-body">
                                 <Label className="required">Nama Kecamatan</Label>
                                 <Input type="text" disabled={this.state.disabled} name="kecamatan" className="form-control" placeholder="Masukkan Nama Kecamatan" value={kecamatan} onChange={this.setValue} />
-                                
+
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                <button type="button" className="btn btn-primary"  disabled={this.state.disabled}  onClick={this.simpan}>Simpan</button>
+                                <button type="button" className="btn btn-primary" disabled={this.state.disabled} onClick={this.simpan}>Simpan</button>
                             </div>
                         </div>
                     </div>
@@ -249,15 +249,15 @@ const mapStateToProps = state => ({
     kotaData: state.KReducer.dataKota,
     provinsiData: state.PReducer.dataProvinsi,
     kecamatanData: state.KecReducer.dataKecamatan
-  })
-  
-  const mapDispatchToProps = dispatch => {
+})
+
+const mapDispatchToProps = dispatch => {
     return {
-      simpanKecamatan: (data)=> dispatch({type:"TAMBAH_KECAMATAN", payload: data}),
-      hapusKecamatan: (data)=> dispatch({type:"HAPUS_KECAMATAN", payload: data}),
-      suntingKecamatan: (data)=> dispatch({type:"SUNTING_KECAMATAN", payload: data}),
-    
+        simpanKecamatan: (data) => dispatch({ type: "TAMBAH_KECAMATAN", payload: data }),
+        hapusKecamatan: (data) => dispatch({ type: "HAPUS_KECAMATAN", payload: data }),
+        suntingKecamatan: (data) => dispatch({ type: "SUNTING_KECAMATAN", payload: data }),
+
     }
-  }
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(Kecamatan);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Kecamatan);

@@ -3,6 +3,7 @@ import merapi from '../asset/merapi.jpg';
 import tsunami from '../asset/tsunami.jpg';
 import longsor from '../asset/longsor.jpg';
 import banjir from '../asset/banjir.jpg';
+import {Img,I} from '../component';
 
 import {Header,Nav,Content, Footer} from '../template';
 
@@ -23,22 +24,22 @@ class HomePage extends Component {
                             <div className="row">
                                 <div className="col-xl-3 col-md-6">
                                     <div>
-                                        <img id="merapi" src={merapi} />
+                                        <Img id="merapi" src={merapi} />
                                     </div>
                                 </div>
                                 <div className="col-xl-3 col-md-6">
                                     <div>
-                                        <img id="tsunami" src={tsunami} />
+                                        <Img id="tsunami" src={tsunami} />
                                     </div>
                                 </div>
                                 <div className="col-xl-3 col-md-6">
                                     <div>
-                                        <img id="banjir" src={banjir} />
+                                        <Img id="banjir" src={banjir} />
                                     </div>
                                 </div>
                                 <div className="col-xl-3 col-md-6">
                                     <div>
-                                        <img id="longsor" src={longsor} />
+                                        <Img id="longsor" src={longsor} />
                                     </div>
                                 </div>
                             </div>
@@ -46,7 +47,7 @@ class HomePage extends Component {
                                 <div className="col-xl-6">
                                     <div className="card mb-4">
                                         <div className="card-header">
-                                            <i className="fas fa-user mr-1" /> Tentang Kami
+                                            <I className="fas fa-user mr-1" /> Tentang Kami
                                         </div><div className="about">Aplikasi ini diciptakan untuk mengorganisir bantuan - bantuan bencana alam</div>
                                         
                                     </div>

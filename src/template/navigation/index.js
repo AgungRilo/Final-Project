@@ -28,7 +28,9 @@ class Nav extends Component {
                 <ul className="navbar-nav ml-auto ml-md-0">
                   <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fas fa-user fa-fw" /></a>
-                    <div className="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    <div 
+                    className="dropdown-menu dropdown-menu-right" 
+                    aria-labelledby="userDropdown">
 
                       <a className="dropdown-item" href="login.html">Logout</a>
                     </div>
@@ -71,20 +73,20 @@ class Nav extends Component {
                               <div className="nav-link" >Kelurahan</div>
                             </Link>
                             <Link to="/bantuan">
-                            <div className="nav-link" >Bantuan</div>
+                              <div className="nav-link" >Bantuan</div>
                             </Link>
                           </nav>
                         </div>
                         <Link to="/kegiatan">
-                        <div className="nav-link" >
-                          <div className="sb-nav-link-icon"><i className="fas fa-book-open" />
-                          </div>Kegiatan
+                          <div className="nav-link" >
+                            <div className="sb-nav-link-icon"><i className="fas fa-book-open" />
+                            </div>Kegiatan
                         </div>
                         </Link>
                         <Link to="/laporan">
-                        <div className="nav-link" >
-                          <div className="sb-nav-link-icon"><i className="fas fa-book-open" />
-                          </div>Laporan
+                          <div className="nav-link" >
+                            <div className="sb-nav-link-icon"><i className="fas fa-book" />
+                            </div>Laporan
                         </div>
                         </Link>
                       </div>

@@ -1,7 +1,16 @@
 let defaultState = {
     dataKegiatan:[
-        
-    ]
+        {   
+            tanggalKegiatan:"2020-01-23",
+            provinsi:"Jawa Barat",
+            kota:"Bekasi",
+            kecamatan:"Setu",
+            kelurahan:"LubangBuaya",
+            tanggalBencana:"2020-01-20T06:30",
+            bencana:"Banjir",
+        }   
+    ],
+    dataKegiatanDetail:{}
 }
 
 const kegiatanReducer = (state = defaultState, action)=>{
@@ -43,10 +52,23 @@ const kegiatanReducer = (state = defaultState, action)=>{
             newKegiatanSunting[action.payload.index].kegiatan = action.payload.kegiatan;
             newKegiatanSunting[action.payload.index].tanggalBantuan = action.payload.tanggalBantuan;
             newKegiatanSunting[action.payload.index].tanggalBencana = action.payload.tanggalBencana;
-
+            
+        
             return{
-                dataKegiatan:newKegiatan
+                dataKegiatan:newKegiatanSunting
             }
+            case "DETAIL":
+                return{
+                    dataKegiatanDetail:{
+                        tanggalKegiatan:action.payload.detail.tanggalKegiatan,
+                        provinsi:action.payload.detail.provinsi,
+                        kota:action.payload.detail.kota,
+                        kecamatan:action.payload.detail.kecamatan,
+                        kelurahan:action.payload.detail.kelurahan,
+                        tanggalBencana:action.payload.detail.tanggalBencana,
+                        bencana:action.payload.detail.bencana,
+                    }
+                }
         default:
             return state
     }

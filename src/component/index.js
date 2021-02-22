@@ -6,5 +6,7 @@ import P from './p';
 import Main from './main';
 import I from './i';
 import Tambah from './tambah';
+import Img from './img';
+import H3 from './h3';
 
-export {Input,Label,Button,Menu,P,Main,I,Tambah}
+export {Input,Label,Button,Menu,P,Main,I,Tambah,Img,H3}

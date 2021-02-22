@@ -143,11 +143,11 @@ class Kota extends Component {
                                         <div className="card-body">
                                             <div className="table-responsive">
                                             
-                                                <table className="table table-bordered" id="dataTable" width="100%" cellSpacing={0}>
+                                                <table className="table table-bordered" width="100%" cellSpacing={0}>
                                                     <thead>
                                                         <tr>
                                                             <th>Provinsi</th>
-                                                            <th>Kota</th>
+                                                            <th>Kota/Kab.</th>
                                                             <th>Aksi</th>
                                                         </tr>
                                                     </thead>

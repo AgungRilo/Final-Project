@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import login from '../../asset/login.png';
-import {Label,Input,Button} from '../../component';
+import {Label,Input,Button,Img} from '../../component';
 import {Redirect} from 'react-router-dom';
 
 
@@ -53,7 +53,7 @@ class Login extends Component {
 
             <div className="container">
                 
-                <img id="login" src={login}/>
+                <Img id="login" src={login}/>
                 <div className="div-group">
                     <Label >Username</Label>
                     <Input type="text" className="form-control" name="username" placeholder="Enter email"  onChange={this.setValue}/>

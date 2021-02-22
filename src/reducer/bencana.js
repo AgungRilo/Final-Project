@@ -9,6 +9,14 @@ let defaultState = {
         {
             bencana: "Gunung Meletus",
             deskripsi: "Disebabkan oleh gunung berapi aktif yang erupsi"
+        },
+        {
+            bencana: "Angin Puting Beliun",
+            deskripsi: "Disebabkan oleh cuaca ekstrim"
+        },
+        {
+            bencana: "Tanah Longsor",
+            deskripsi: "Disebabkan oleh tanah yang lapuk dan intensitas hujan yang tinggi"
         }
     ]
 }
