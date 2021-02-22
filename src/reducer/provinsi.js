@@ -35,10 +35,10 @@ const provinsiReducer = (state =defaultState,action)=>{
             dataProvinsi:dataProvinsiBaru
         }
         case "SUNTING_PROVINSI":
-            let newBencanaSunting=state.dataProvinsi
-            newBencanaSunting[action.provinsi.index].provinsi = action.payload.provinsi;
+            let newProvinsiSunting=state.dataProvinsi
+            newProvinsiSunting[action.payload.index].provinsi = action.payload.provinsi;
         return{
-            dataProvinsi:newProvinsi
+            dataProvinsi:newProvinsiSunting
         }
         default:
             return state

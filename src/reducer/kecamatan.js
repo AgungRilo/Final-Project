@@ -47,7 +47,7 @@ const kecamatanReducer = (state = defaultState, action)=>{
             newKecamatanSunting[action.payload.index].kecamatan = action.payload.kecamatan;
 
             return{
-                dataKecamatan:newKecamatan
+                dataKecamatan:newKecamatanSunting
             }
         default:
             return state

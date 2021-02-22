@@ -9,7 +9,8 @@ class Provinsi extends Component {
             provinsi:"",
             kondisi:0,
             provinsiEdit:{},
-            index:""
+            index:"",
+            statusEdit:false
             
          }
     }
@@ -47,7 +48,7 @@ class Provinsi extends Component {
         } else {
             this.props.suntingProvinsi(obj)
             this.setState({
-                kondisi:0
+                statusEdit:false
             });
             el.preventDefault()
             this.clear()
@@ -69,9 +70,10 @@ class Provinsi extends Component {
     sunting = (index)=>{
         this.setState({
             kondisi:1,
-            index:index
+            index:index,
+            statusEdit:true
         });
-        const dataEdit = this.props.dataProvinsi[index];
+        let dataEdit = this.props.provinsiData[index];
 
         this.setState({
             provinsiEdit:dataEdit
@@ -80,11 +82,12 @@ class Provinsi extends Component {
 
 
     render() { 
-        if("provinsi" in this.state.provinsiEdit){
+        if(this.state.statusEdit){
             this.setState({
-                provinsi:this.state.provinsiEdit.provinsi
+                provinsi:this.state.provinsiEdit.provinsi,
+                statusEdit:false
             })
-            this.reset();
+            // this.reset();
         }
         const {provinsi}=this.state
         return ( 
@@ -123,8 +126,8 @@ class Provinsi extends Component {
                                                                         {/* <td>{index+1}</td> */}
                                                                         <td>{p.provinsi}</td>
                                                                         <td>
-                                                                            <Button id="sunting" className="btn btn-warning">Sunting</Button>
-                                                                            <Button id="hapus" className="btn btn-danger" onClick={this.hapusData}>Hapus</Button>
+                                                                        <Button dataToogle="modal" dataTarget="#exampleModal" id="sunting" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onClick={()=>{this.sunting(index)}}>Sunting</Button>
+                                                                        <Button id="hapus" className="btn btn-danger" onClick={()=>{this.hapusData(index)}}>Hapus</Button>
                                                                         </td>
                                                                     </tr>
                                                                 )

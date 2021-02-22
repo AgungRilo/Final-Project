@@ -14,7 +14,8 @@ class Kelurahan extends Component {
             kondisi:0,
             index:"",
             kelurahanEdit:{},
-            disabled  :true
+            disabled  :true,
+            statusEdit : false
             // idx:""
 
         }
@@ -56,7 +57,7 @@ class Kelurahan extends Component {
         } else {
             this.props.suntingKelurahan(obj)
             this.setState({
-                kondisi:0
+                statusEdit:false
             });
             el.preventDefault()
             this.clear()
@@ -82,7 +83,7 @@ class Kelurahan extends Component {
             let kelurahanBaru = this.props.kelurahanData;
             
             console.log(kelurahanBaru);
-            this.props.hapusKelurahan({kelurahanUpdate : kelurahanBaru})
+            this.props.hapusKelurahan({kelurahanUpdate : kelurahanBaru,index:index})
             
             alert("Berhasil Menghapus Data !!");
         }
@@ -94,10 +95,11 @@ class Kelurahan extends Component {
     sunting = (index) => {
         this.setState({
           kondisi: 1,
-          index: index
+          index: index,
+          statusEdit:true
         });
     
-        const dataEdit=this.props.dataKelurahan[index];
+        const dataEdit=this.props.kelurahanData[index];
       
         this.setState({
           kelurahanEdit: dataEdit
@@ -122,12 +124,13 @@ class Kelurahan extends Component {
         console.log(this.props.kelurahanData);
         
         console.log("data b encacna", this.props.bencanaData);
-        if ("kelurahan" in this.state.kelurahanEdit) {
+        if (this.state.statusEdit) {
             this.setState({
-                kelurahan: this.state.bencanaEdit.kelurahan,
-                deskripsi: this.state.bencanaEdit.deskripsi
+                kelurahan: this.state.kelurahanEdit.kelurahan,
+                deskripsi: this.state.kelurahanEdit.deskripsi,
+                statusEdit:false
             })
-            this.reset();
+            // this.reset();
         }
         const {kota, provinsi,kecamatan,kelurahan}=this.state
         return (
@@ -172,8 +175,8 @@ class Kelurahan extends Component {
                                                                         <td>{k.kelurahan}</td>
                                                                         
                                                                         <td>
-                                                                            <Button id="sunting" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onClick={this.sunting}>Sunting</Button>
-                                                                            <Button id="hapus" className="btn btn-danger" onClick={this.hapusData}>Hapus</Button>
+                                                                            <Button dataToogle="modal" dataTarget="#exampleModal" id="sunting" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onClick={()=>{this.sunting(index)}}>Sunting</Button>
+                                                                            <Button id="hapus" className="btn btn-danger" onClick={()=>{this.hapusData(index)}}>Hapus</Button>
                                                                         </td>
                                                                     </tr>
                                                                 )

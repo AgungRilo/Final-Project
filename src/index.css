@@ -120,6 +120,13 @@ h2{
   margin-left: 100vh;
 }
 
+#hapusData{
+  float: left;
+}
+#suntingData{
+  float: left;
+}
+
 #btnKecamatan{
   margin-left: 100vh;
 }

@@ -34,7 +34,7 @@ class Login extends Component {
         console.log("find", find);
 
         if (find.length > 0) {
-            alert("Login Sukses")
+            
             this.props.submitLogin( {user: find1[0]} )
             this.props.history.push("/")
         } else {

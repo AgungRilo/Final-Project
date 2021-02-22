@@ -107,7 +107,7 @@ class Bencana extends Component {
     }
 
     render() {
-        console.log("data b encacna", this.state.bencanaEdit);
+        console.log("data bencacna", this.state.bencanaEdit);
         if (this.state.statusEdit) {
             this.setState({
                 bencana: this.state.bencanaEdit.bencana,
@@ -156,8 +156,16 @@ class Bencana extends Component {
                                                                         <td>{a.bencana}</td>
                                                                         <td>{a.deskripsi}</td>
                                                                         <td>
-                                                                            <Button dataToogle="modal" dataTarget="#exampleModal" id="sunting" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onClick={()=>{this.sunting(index)}}>Sunting</Button>
-                                                                            <Button id="hapus" className="btn btn-danger" onClick={()=>{this.hapusData(index)}}>Hapus</Button>
+                                                                            <div>
+                                                                                <div className="suntingData">
+
+                                                                                    <Button dataToogle="modal" dataTarget="#exampleModal" id="sunting" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onClick={()=>{this.sunting(index)}}>Sunting</Button>
+                                                                                </div>
+                                                                                <div className="hapusData">
+
+                                                                                    <Button id="hapus" className="btn btn-danger" onClick={()=>{this.hapusData(index)}}>Hapus</Button>
+                                                                                </div>
+                                                                            </div>
                                                                         </td>
                                                                     </tr>
                                                                 )

@@ -12,8 +12,9 @@ class Kecamatan extends Component {
             kota:"",
             kondisi:0,
             index:"",
-            kotaEdit:{},
-            disabled  :true
+            kecamatanEdit:{},
+            disabled  :true,
+            statusEdit : false
             // idx:""
 
         }
@@ -55,7 +56,7 @@ class Kecamatan extends Component {
         } else {
             this.props.suntingKecamatan(obj)
             this.setState({
-                kondisi:0
+                statusEdit:false
             });
             el.preventDefault()
             this.clear()
@@ -80,7 +81,7 @@ class Kecamatan extends Component {
             let kecamatanBaru = this.props.kecamatanData;
             
             console.log(kecamatanBaru);
-            this.props.hapusKecamatan({kecamtanUpdate : kecamatanBaru})
+            this.props.hapusKecamatan({kecamtanUpdate : kecamatanBaru,index:index})
             
             alert("Berhasil Menghapus Data !!");
         }
@@ -90,17 +91,14 @@ class Kecamatan extends Component {
 
 
     sunting = (index) => {
+        const dataEdit=this.props.kecamatanData[index];
+        console.log(dataEdit);
         this.setState({
-          kondisi: 1,
-          index: index
+            kecamatanEdit: dataEdit,
+            kondisi: 1,
+            index: index,
+            statusEdit:true
         });
-    
-        const dataEdit=this.props.dataKecamatan[index];
-      
-        this.setState({
-          kecamtanEdit: dataEdit
-        })
-      
       }
     
       reset = ()=> {
@@ -118,12 +116,17 @@ class Kecamatan extends Component {
         console.log(this.props.kotaData);
         console.log(this.props.kecamatanData);
         
-        if("kota" in this.state.kotaEdit){
+        if(this.state.statusEdit){
+            console.log("provinsi",this.state.kecamatanEdit);
             this.setState({
-                kota:this.state.kotaEdit.kota,
-                
+                kota:this.state.kecamatanEdit.kota,
+                provinsi:this.state.kecamatanEdit.provinsi,
+                kecamatan:this.state.kecamatanEdit.kecamatan,
+                statusEdit:false
+            }, () => {
+                console.log(this.state);
             })
-            this.reset();
+            // this.reset();
         }
         const {kota, provinsi,kecamatan}=this.state
         return (
@@ -166,8 +169,8 @@ class Kecamatan extends Component {
                                                                         <td>{k.kecamatan}</td>
                                                                         
                                                                         <td>
-                                                                            <Button id="sunting" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onClick={this.sunting}>Sunting</Button>
-                                                                            <Button id="hapus" className="btn btn-danger" onClick={this.hapusData}>Hapus</Button>
+                                                                            <Button dataToogle="modal" dataTarget="#exampleModal" id="sunting" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onClick={()=>{this.sunting(index)}}>Sunting</Button>
+                                                                            <Button id="hapus" className="btn btn-danger" onClick={()=>{this.hapusData(index)}}>Hapus</Button>
                                                                         </td>
                                                                     </tr>
                                                                 )

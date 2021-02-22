@@ -44,7 +44,7 @@ const kelurahanReducer = (state = defaultState, action)=>{
             newKelurahanSunting[action.payload.index].kelurahan = action.payload.kelurahan;
 
             return{
-                dataKelurahan:newKelurahan
+                dataKelurahan:newKelurahanSunting
             }
         default:
             return state
