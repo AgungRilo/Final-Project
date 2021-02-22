@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import bencana from '../bencana';
 import { Link } from 'react-router-dom';
 import detail from '../detail';
+import {I} from '../../component';
 
 class Kegiatan extends Component {
     constructor(props) {
@@ -71,25 +72,7 @@ class Kegiatan extends Component {
         }
     }
 
-    // detail = (id) => {
-
-        
-    //     let find = this.props.detailKegiatan.filter(dataKegiatanDetail => {
-    //         return dataKegiatanDetail.
-    //     })
-    //     let find1 = dataKegiatanDetail.filter(users => {
-    //         return 
-    //     })
-    //     console.log("find1",find1[0]);
-    //     console.log("find", find);
-
-    //     if (find.length > 0) {
-            
-    //         this.props.submitLogin( {user: find1[0]} )
-    //         this.props.history.push("/")
-    //     }
-    //     // e.preventDefault()
-    // }
+    
     
     clear = () => {
         this.setState({ 
@@ -168,13 +151,12 @@ class Kegiatan extends Component {
                             <main>
                                 <div className="container-fluid" id="container">
                                     <div className="card mb-4">
-                                        <div className="card-header">
-                                            <i className="fas fa-table mr-1" /> Data Kegiatan
+                                    <div className="card-header">
+                                            <I className="fas fa-table mr-1" /> Kegiatan
 
                                             <button type="button" id="btnKegiatan" className="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-                                                <i className="fas fa-plus mr-1" />Tambah
+                                                <I className="fas fa-plus mr-1" />Tambah
                                             </button>
-                                            
 
                                         </div>
                                         <div className="card-body">
@@ -209,9 +191,9 @@ class Kegiatan extends Component {
                                                                         <td>{k.bencana}</td>
                                                                         
                                                                         <td>
-                                                                            <Link to="/detail">
+                                                                            <Link to={"/detail/"+k.bencana}>
 
-                                                                            <Button id="detail" className="btn btn-primary" onClick={() => { this.detail() }} >Detail</Button>
+                                                                            <Button id="detail" className="btn btn-primary"  >Detail</Button>
                                                                             </Link>
                                                                             <Button dataToogle="modal" dataTarget="#exampleModal" id="sunting" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onClick={() => { this.sunting(index) }}>Sunting</Button>
                                                                             <Button id="hapus" className="btn btn-danger" onClick={() => { this.hapusData(index) }}>Hapus</Button>

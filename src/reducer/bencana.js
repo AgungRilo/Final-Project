@@ -17,6 +17,10 @@ let defaultState = {
         {
             bencana: "Tanah Longsor",
             deskripsi: "Disebabkan oleh tanah yang lapuk dan intensitas hujan yang tinggi"
+        },
+        {
+            bencana: "Banjir",
+            deskripsi: "Disebabkan oleh penyumbatan di aliran irigasi dan didukung oleh intensitas hujan yang tinggi"
         }
     ]
 }

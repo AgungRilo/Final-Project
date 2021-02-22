@@ -23,7 +23,7 @@ class Content extends Component {
                 <Route path="/bantuan" component={props => <Bantuan {...props} />} />
                 <Route path="/kegiatan" component={props => <Kegiatan {...props} />} />
                 <Route path="/laporan" component={props => <Laporan {...props} />} />
-                <Route path="/detail" component={props => <Detail {...props} />} />
+                <Route path="/detail/:namaB" component={props => <Detail {...props} />} />
             </Switch>
          );
     }

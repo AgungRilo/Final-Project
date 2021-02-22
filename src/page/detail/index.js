@@ -17,7 +17,7 @@ class Detail extends Component {
 
     render() {
        
-        
+        console.log(this.props);
         return (
             <>
                 <div>
@@ -53,20 +53,20 @@ class Detail extends Component {
                                                     <tbody>
                                                         {this.props.kegiatanData &&
                                                             this.props.kegiatanData.map((k, index)=>{
-                                                                return(
-                                                                
-                                                                    <tr key={index}>
-                                                                        <td>{k.tanggalKegiatan}</td>
-                                                                        <td>{k.provinsi}</td>
-                                                                        <td>{k.kota}</td>
-                                                                        <td>{k.kecamatan}</td>
-                                                                        <td>{k.kelurahan}</td>
-                                                                        <td>{k.tanggalBencana}</td>
-                                                                        <td>{k.bencana}</td>
+                                                                if (k.bencana == this.props.match.params.namaB) {
+                                                                    return(
                                                                         
-                                                                        
-                                                                    </tr>
-                                                                )
+                                                                        <tr key={index}>
+                                                                            <td>{k.tanggalKegiatan}</td>
+                                                                            <td>{k.provinsi}</td>
+                                                                            <td>{k.kota}</td>
+                                                                            <td>{k.kecamatan}</td>
+                                                                            <td>{k.kelurahan}</td>
+                                                                            <td>{k.tanggalBencana}</td>
+                                                                            <td>{k.bencana}</td>                                                                            
+                                                                        </tr>
+                                                                    )
+                                                                }
                                                             })
                                                         }
                                                         

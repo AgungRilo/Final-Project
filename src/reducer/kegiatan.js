@@ -8,7 +8,16 @@ let defaultState = {
             kelurahan:"LubangBuaya",
             tanggalBencana:"2020-01-20T06:30",
             bencana:"Banjir",
-        }   
+        },
+        {   
+            tanggalKegiatan:"2020-01-23",
+            provinsi:"Jawa Barat",
+            kota:"Bekasi",
+            kecamatan:"Setu",
+            kelurahan:"LubangBuaya",
+            tanggalBencana:"2020-01-20T06:30",
+            bencana:"Gunung Meletus",
+        }      
     ],
     dataKegiatanDetail:{}
 }

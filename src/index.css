@@ -109,7 +109,7 @@ h2{
 }
 
 #btnBencana{
-  margin-left: 100vh;
+  margin-left: 118vh;
 }
 
 #btnKota{
@@ -128,16 +128,32 @@ h2{
 }
 
 #btnKecamatan{
-  margin-left: 100vh;
+  margin-left: 30vh;
 }
 
 #btnKelurahan{
-  margin-left: 100vh;
+  margin-left: 50vh;
 }
 
 #btnBantuan{
-  margin-left: 100vh;
+  margin-left: 42vh;
 }
+
+#btnKegiatan{
+  margin-left: 80vh;
+}
+
+
+
+#detail{
+  width: 14vh;
+}
+
+#sunting{
+  margin-top: 1vh;
+  width: 14vh;
+}
+
 
 #btnKegiatan{
   margin-left: 130vh;

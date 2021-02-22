@@ -5,6 +5,12 @@ let defaultState = {
             kota:"Bekasi",
             kecamatan:"Setu",
             kelurahan:"LubangBuaya"
+        },
+        {
+            provinsi:"Jawa Barat",
+            kota:"Depok",
+            kecamatan:"Cilodong",
+            kelurahan:"Sukamaju"
         }
     ]
 }
